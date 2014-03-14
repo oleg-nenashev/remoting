@@ -15,6 +15,8 @@
  */
 package hudson.remoting;
 
+import javax.annotation.CheckForNull;
+
 /**
  * This class provides encode/decode for RFC 2045 Base64 as
  * defined by RFC 2045, N. Freed and N. Borenstein.
@@ -191,8 +193,10 @@ public final class  Base64 {
      * Decodes Base64 data into octects
      *
      * @param encoded string containing Base64 data
-     * @return Array containind decoded data.
+     * @return Array containing decoded data. 
+     * The result is null for the null encoded string.
      */
+    @CheckForNull
     public static byte[] decode(String encoded) {
 
         if (encoded == null)

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Map;
+import javax.annotation.CheckForNull;
 
 /**
  * Implements full {@link IClassLoader} from a legacy one
@@ -54,12 +55,14 @@ class DumbClassLoaderBridge implements IClassLoader {
                 new ClassFile2(cf.classLoader,new ResourceImageDirect(cf.classImage),null,null,null));
     }
 
+    @CheckForNull
     public ResourceFile getResource2(String name) throws IOException {
         byte[] img = base.getResource(name);
         if (img==null)  return null;
         return new ResourceFile(new ResourceImageDirect(img), null); // we are on the receiving side, so null is ok
     }
 
+    @CheckForNull
     public ResourceFile[] getResources2(String name) throws IOException {
         byte[][] r = base.getResources(name);
         if (r==null)    return null;
