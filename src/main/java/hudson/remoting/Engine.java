@@ -214,7 +214,7 @@ public class Engine extends Thread {
                 Throwable firstError=null;
                 String host=null;
                 String port=null;
-                SSLSocketFactory sslSocketFactory = getSSLSocketFactory();
+                final SSLSocketFactory sslSocketFactory = getSSLSocketFactory();
 
                 for (URL url : candidateUrls) {
                     String s = url.toExternalForm();
@@ -554,6 +554,7 @@ public class Engine extends Thread {
         });
     }
 
+    @CheckForNull
     private SSLSocketFactory getSSLSocketFactory()
             throws PrivilegedActionException, KeyStoreException, NoSuchProviderException, CertificateException,
             NoSuchAlgorithmException, IOException, KeyManagementException {
@@ -578,6 +579,7 @@ public class Engine extends Thread {
         }
         return sslSocketFactory;
     }
+    
     //a read() call on the SocketInputStream associated with underlying Socket will block for only this amount of time
     static final int SOCKET_TIMEOUT = Integer.getInteger(Engine.class.getName()+".socketTimeout",30*60*1000);
     /**

@@ -17,6 +17,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 import java.util.Iterator;
+import javax.annotation.CheckForNull;
 
 /**
  * Misc. I/O utilities
@@ -163,7 +164,8 @@ class Util {
      * If http_proxy environment variable exists,  the connection uses the proxy.
      * Credentials can be passed e.g. to support running Jenkins behind a (reverse) proxy requiring authorization
      */
-    static URLConnection openURLConnection(URL url, String credentials, String proxyCredentials, SSLSocketFactory sslSocketFactory) throws IOException {
+    static URLConnection openURLConnection(URL url, String credentials, String proxyCredentials, 
+            @CheckForNull SSLSocketFactory sslSocketFactory) throws IOException {
         String httpProxy = null;
         // If http.proxyHost property exists, openConnection() uses it.
         if (System.getProperty("http.proxyHost") == null) {
